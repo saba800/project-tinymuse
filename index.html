@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-7">
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="mb-3">🎲 Idea Generator</h5>
+
+        <div class="input-group mb-2">
+          <input id="q" class="form-control" placeholder="Keyword or theme (optional)">
+          <button id="gen" class="btn btn-primary">Generate</button>
+        </div>
+
+        <div id="result" class="p-3 border rounded bg-white mb-2" style="min-height:70px">
+          No idea generated yet.
+        </div>
+
+        <div class="d-flex gap-2">
+          <button id="favBtn" class="btn btn-outline-success btn-sm">
+            Save to Favorites
+          </button>
+          <button id="copyBtn" class="btn btn-outline-secondary btn-sm">
+            Copy
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h6>Add a New Prompt</h6>
+
+        <textarea id="newPrompt" class="form-control mb-2" rows="2"
+          placeholder="Write your own creative prompt here..."></textarea>
+
+        <div class="d-flex gap-2 mb-2">
+          <button id="addBtn" class="btn btn-outline-primary btn-sm">Add Prompt</button>
+          <button id="searchBtn" class="btn btn-outline-secondary btn-sm">Search</button>
+          <input id="searchInput" class="form-control form-control-sm"
+                 placeholder="Search prompts..." style="max-width:220px">
+        </div>
+
+        <div id="searchResults"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-5">
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h6>Favorites</h6>
+
+        <div id="favoritesList">
+          {% if favorites %}
+            {% for f in favorites %}
+              <div class="border rounded p-2 mb-2 bg-white">
+                <div class="small text-muted">{{ f['created_at'] }}</div>
+                <div>{{ f['text'] }}</div>
+                {% if f['note'] %}
+                  <div class="small text-secondary">Note: {{ f['note'] }}</div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="text-muted small">
+              No favorites saved yet.
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h6>Recent Prompts</h6>
+        <ul class="list-group list-group-flush">
+          {% for p in recent %}
+            <li class="list-group-item small">
+              {{ p['text'] }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+

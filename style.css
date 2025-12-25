@@ -1,0 +1,8 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+#result {
+  font-size: 1.05rem;
+  white-space: pre-wrap;
+}
